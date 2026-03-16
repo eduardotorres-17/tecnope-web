@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fundo base do site levemente gelo para destacar os cards brancos depois */
+body {
+  background-color: #f8fafc; 
+}

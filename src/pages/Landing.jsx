@@ -13,16 +13,34 @@ import {
   Sparkles,
   Clock,
   ShieldPlus,
-  Instagram,
+  Lock, // Importamos o cadeado para o Admin
 } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom"; // Importamos o Link para a rota do Admin
 import BookingModal from "../components/BookingModal";
+
+// --- COMPONENTE DO NOVO LOGO VETORIAL ---
+const LogoTecnope = ({ size = 40 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="40" height="40" rx="12" fill="#14b8a6" />
+    <path
+      d="M12 14C12 12.8954 12.8954 12 14 12H26C27.1046 12 28 12.8954 28 14V16C28 17.1046 27.1046 18 26 18H22V26C22 27.1046 21.1046 28 20 28C18.8954 28 18 27.1046 18 26V18H14C12.8954 18 12 17.1046 12 16V14Z"
+      fill="white"
+    />
+    <circle cx="26" cy="24" r="4" fill="#ccfbf1" opacity="0.8" />
+  </svg>
+);
 
 export default function Landing() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Número oficial do WhatsApp (apenas números para o link)
   const numeroWhatsApp = "5553999342072";
 
   const servicos = [
@@ -72,18 +90,15 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen font-sans text-slate-800 bg-slate-50">
-      {/* --- NAVBAR --- */}
+      {/* NAVBAR */}
       <nav className="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
             <div
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer"
               onClick={() => window.scrollTo(0, 0)}
             >
-              <div className="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/30">
-                <span className="text-white font-bold text-xl">T</span>
-              </div>
+              <LogoTecnope />
               <div>
                 <h1 className="text-2xl font-bold text-brand-900 tracking-tight leading-none">
                   Tecnopé
@@ -94,7 +109,6 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Menu Desktop */}
             <div className="hidden md:flex items-center gap-8">
               <a
                 href="#servicos"
@@ -124,7 +138,6 @@ export default function Landing() {
               </button>
             </div>
 
-            {/* Menu Mobile Button */}
             <button
               className="md:hidden p-2 text-slate-600"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -134,7 +147,6 @@ export default function Landing() {
           </div>
         </div>
 
-        {/* Menu Mobile Dropdown */}
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-slate-100 p-4 flex flex-col gap-4 shadow-xl">
             <a
@@ -159,17 +171,19 @@ export default function Landing() {
               Localização
             </a>
             <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-md hover:shadow-brand-500/40 flex items-center gap-2"
+              onClick={() => {
+                setIsModalOpen(true);
+                setIsMenuOpen(false);
+              }}
+              className="bg-brand-500 text-white p-3 rounded-xl font-bold flex items-center justify-center gap-2 w-full mt-2"
             >
-              <CalendarDays size={18} />
-              Agendar Agora
+              <CalendarDays size={18} /> Agendar Agora
             </button>
           </div>
         )}
       </nav>
 
-      {/* --- HERO SECTION --- */}
+      {/* HERO SECTION */}
       <main className="pt-32 pb-16 md:pt-40 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 bg-slate-50">
         <div className="flex-1 text-center md:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-600 text-sm font-semibold mb-6">
@@ -194,12 +208,11 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-md hover:shadow-brand-500/40 flex items-center gap-2"
+              className="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-brand-500/30 flex items-center justify-center gap-2 text-lg active:scale-95"
             >
-              <CalendarDays size={18} />
+              <CalendarDays size={20} />
               Marcar Consulta
             </button>
-            {/* NOVO: Botão de dúvidas agora vai direto pro WhatsApp */}
             <a
               href={`https://wa.me/${numeroWhatsApp}?text=Olá! Estava no site da Tecnopé e gostaria de tirar uma dúvida.`}
               target="_blank"
@@ -231,12 +244,13 @@ export default function Landing() {
 
         <div className="flex-1 w-full max-w-lg md:max-w-none relative">
           <div className="absolute inset-0 bg-brand-100 rounded-[3rem] transform rotate-3 scale-105 -z-10"></div>
+          {/* FOTO PRINCIPAL INSERIDA AQUI */}
           <div className="bg-slate-200 w-full aspect-square md:aspect-[4/3] rounded-[3rem] flex items-center justify-center border-8 border-white shadow-2xl relative overflow-hidden">
-            <div className="text-center p-6">
-              <p className="text-slate-400 font-medium mb-2">
-                Espaço para a Foto Principal
-              </p>
-            </div>
+            <img
+              src="https://lh3.googleusercontent.com/p/AF1QipPKtpVhZFAbNaAUAmPJKnKlzC2ORPuBP1zBHgho=s680-w680-h510-rw"
+              alt="Clínica Tecnopé Atendimento"
+              className="w-full h-full object-cover"
+            />
             <div
               className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4 animate-bounce"
               style={{ animationDuration: "3s" }}
@@ -257,7 +271,7 @@ export default function Landing() {
         </div>
       </main>
 
-      {/* --- SEÇÃO DE SERVIÇOS --- */}
+      {/* SERVIÇOS */}
       <section
         id="servicos"
         className="py-20 bg-white border-t border-slate-100"
@@ -276,7 +290,6 @@ export default function Landing() {
               procedimentos.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {servicos.map((servico) => (
               <div
@@ -298,21 +311,28 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* --- SEÇÃO SOBRE A CLÍNICA --- */}
+      {/* SOBRE A CLÍNICA */}
       <section
         id="sobre"
         className="py-20 bg-brand-900 text-white relative overflow-hidden"
       >
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-16">
           <div className="flex-1 w-full">
             <div className="relative">
               <div className="absolute inset-0 border-2 border-brand-400 rounded-3xl transform translate-x-4 translate-y-4"></div>
-              <div className="bg-brand-800 w-full aspect-square md:aspect-[4/5] rounded-3xl relative z-10 flex items-center justify-center border-4 border-brand-900 shadow-2xl overflow-hidden">
-                <div className="text-center p-6 text-brand-300">
-                  <p className="font-medium mb-2">Foto da Ana e do Nei</p>
-                  <p className="text-sm">(Sorridendo com jalecos na clínica)</p>
+              {/* FOTO DA CLÍNICA / PROFISSIONAIS */}
+              <div className="flex-1 w-full relative group">
+                {/* Brilho de fundo suave (Glow effect) */}
+                <div className="absolute inset-0 bg-brand-400 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+
+                {/* Container da Imagem Limpo e Centralizado */}
+                <div className="bg-brand-800 w-full aspect-square md:aspect-[4/5] rounded-3xl relative z-10 border-4 border-brand-700/50 shadow-2xl overflow-hidden">
+                  <img
+                    src="https://lh3.googleusercontent.com/p/AF1QipOoyNQDnaGU75hePK6Ngt_GbHP0IgNEAffFqYyw=s680-w680-h510-rw"
+                    alt="Ana e Nei - Podólogos Tecnopé"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
                 </div>
               </div>
             </div>
@@ -333,7 +353,7 @@ export default function Landing() {
               de vida para nossos pacientes na cidade de Bagé.
             </p>
 
-            <ul className="space-y-4 mb-10">
+            <ul className="space-y-4">
               <li className="flex items-start gap-4">
                 <div className="bg-brand-800 p-2 rounded-lg">
                   <ShieldPlus size={20} className="text-brand-400" />
@@ -363,27 +383,20 @@ export default function Landing() {
                 </div>
               </li>
             </ul>
-
-            <button className="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-full font-bold transition-all shadow-lg flex items-center gap-2">
-              Conhecer a Estrutura
-            </button>
           </div>
         </div>
       </section>
 
-      {/* --- FOOTER & LOCALIZAÇÃO --- */}
+      {/* FOOTER & LOCALIZAÇÃO */}
       <footer
         id="localizacao"
         className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t-4 border-brand-500"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 border-b border-slate-800 pb-12">
-            {/* Info Marca */}
             <div>
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">T</span>
-                </div>
+              <div className="flex items-center gap-3 mb-6">
+                <LogoTecnope size={32} />
                 <div>
                   <h1 className="text-2xl font-bold text-white leading-none">
                     Tecnopé
@@ -398,17 +411,8 @@ export default function Landing() {
                 Bagé/RS. Tratamentos avançados, sem dor e com total
                 biossegurança.
               </p>
-              <div className="flex gap-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-colors"
-                >
-                  <Instagram size={20} />
-                </a>
-              </div>
             </div>
 
-            {/* Contatos & Horários */}
             <div>
               <h3 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">
                 Atendimento
@@ -425,19 +429,26 @@ export default function Landing() {
                     </p>
                   </div>
                 </li>
-                <li className="flex items-center gap-3 text-sm">
-                  <Phone size={18} className="text-brand-500" />
+                <li className="flex items-start gap-3 text-sm">
+                  <Phone size={18} className="text-brand-500 mt-1" />
                   <div>
                     <p className="font-medium text-slate-200">
                       WhatsApp / Telefone
                     </p>
-                    <p className="text-slate-400">(53) 99934-2072</p>
+                    {/* Botão de WhatsApp no rodapé */}
+                    <a
+                      href={`https://wa.me/${numeroWhatsApp}?text=Olá! Gostaria de agendar uma consulta na Tecnopé.`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-brand-500 hover:text-brand-400 font-bold transition-colors inline-block mt-1"
+                    >
+                      (53) 99934-2072 ↗
+                    </a>
                   </div>
                 </li>
               </ul>
             </div>
 
-            {/* Localização (DADOS REAIS E MAPA) */}
             <div>
               <h3 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">
                 Onde Estamos
@@ -461,7 +472,6 @@ export default function Landing() {
                 </div>
               </div>
 
-              {/* IFRAME DO GOOGLE MAPS */}
               <div className="w-full h-48 bg-slate-800 rounded-lg overflow-hidden border border-slate-700 shadow-inner">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4229.686892914661!2d-54.10929862351304!3d-31.31469069134412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9506756f9ba57c81%3A0x6a696392319ea8c3!2sPODOLOGIA%20ANA%20E%20NEI!5e1!3m2!1spt-BR!2sbr!4v1773688261330!5m2!1spt-BR!2sbr"
@@ -479,13 +489,24 @@ export default function Landing() {
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
             <p>
-              &copy; 2026 Tecnopé (Podologia Ana e Nei). Todos os direitos
+              © 2026 Tecnopé (Podologia Ana e Nei). Todos os direitos
               reservados.
             </p>
-            <p>Desenvolvido com 💚 por Eduardo Torres</p>
+            <div className="flex items-center gap-6">
+              {/* LINK DISCRETO PARA O PAINEL ADMIN */}
+              <Link
+                to="/login"
+                className="flex items-center gap-1.5 hover:text-brand-500 transition-colors"
+              >
+                <Lock size={12} />
+                Acesso Restrito
+              </Link>
+              <p>Desenvolvido por Eduardo Bertinetti Torres</p>
+            </div>
           </div>
         </div>
       </footer>
+
       <BookingModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

@@ -43,7 +43,7 @@ O sistema utiliza o padrão de **Time Slots**. Em vez de permitir que o usuário
 
 1. Clone este repositório:
 ```bash
-git clone [https://github.com/eduardotorres-17/tecnope-web.git](https://github.com/SEU_USUARIO/tecnope-web.git)
+git clone [https://github.com/eduardotorres-17/tecnope-web.git](https://github.com/eduardotorres-17/tecnope-web.git)
 
 2. Acesse a pasta do projeto:
 
@@ -64,4 +64,8 @@ Inicie o servidor de desenvolvimento:
 Bash
 npm run dev
 
-Desenvolvido por Eduardo Bertinetti Torres.
+👨‍💻 Autor Eduardo Bertinetti Torress
+
+Portfólio: https://portfolio-eduardo-torres.vercel.app/
+
+Email: eduardobtorres17@gmail.com
